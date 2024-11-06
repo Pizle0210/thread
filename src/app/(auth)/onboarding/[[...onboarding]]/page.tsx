@@ -5,6 +5,8 @@ async function Page() {
 
   const user = await currentUser()
 
+
+
   const userInfo = {}
 
   const userData = {
@@ -29,4 +31,4 @@ async function Page() {
   );
 }
 
-export default Page;
+export default Page

@@ -15,7 +15,7 @@ import {
 import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
 import { isBase64Image } from '@/lib/utils';
-import {useUploadThing} from '@/lib/uploadthing'
+import { useUploadThing } from '@/lib/uploadthing'
 
 
 
@@ -34,10 +34,10 @@ interface Props {
 export default function AccountProfile({ user, btnTitle }: Props) {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<File[]>([])
-  const {startUpload} = useUploadThing('media')
+  const { startUpload } = useUploadThing('media')
 
 
-
+  // form
   const form = useForm<z.infer<typeof UserValidation>>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -49,7 +49,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     }
   })
 
-
+  // image setup
   const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
     e.preventDefault()
 
@@ -60,18 +60,18 @@ export default function AccountProfile({ user, btnTitle }: Props) {
 
       if (!file.type.includes('image')) return
 
-      fileReader.onload = async(event) => {
-        const imageDataUrl = event.target?.result?.toString() || ""; 
+      fileReader.onload = async (event) => {
+        const imageDataUrl = event.target?.result?.toString() || "";
         fieldChange(imageDataUrl)
-
       }
 
       fileReader.readAsDataURL(file);
     }
   }
+  console.log(user.id);
 
   // 2. Define a submit handler.
- async function onSubmit(values: z.infer<typeof UserValidation>) {
+  async function onSubmit(values: z.infer<typeof UserValidation>) {
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob)
@@ -83,9 +83,10 @@ export default function AccountProfile({ user, btnTitle }: Props) {
         values.profile_photo = imgRes[0].url
       }
     }
-   
-   //  update profile
-   
+
+    //  update profile
+
+
   }
 
 
@@ -101,7 +102,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             <FormItem className='flex items-center gap-2'>
               <FormLabel className='account-form_image-label'>
                 {field.value ? (
-                  <Image src={field.value} alt='profile_photo' height={96} width={96} priority className='rounded-full object-contain h-[130px] w-[130px]' />
+                  <Image src={field.value} alt='profile_photo' height={96} width={96} priority className='rounded-full h-[130px] w-[130px]' />
                 ) : (
                   <Image src={'/assets/profile.svg'} alt='profile-logo' height={24} width={24} className='object-contain' />
                 )}
