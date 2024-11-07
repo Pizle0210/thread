@@ -9,15 +9,15 @@ export default function TopBar() {
     return (
         <nav className='topbar'>
             <Link href='/' className='flex items-center gap-4'>
-                <Image src={'/logo.svg'} alt='logo' width={30} height={30} quality={80} priority />
+                <Image src={'/logo2.svg'} className='bg-white rounded-full' alt='logo' width={30} height={30} quality={80} priority />
                 <p className='text-heading3-bold text-light-1 max-sm:hidden'>Threads </p>
             </Link>
             <div className="flex items-center gap-1">
                 <div className="block md:hidden">
-                     
+
                 </div>
                 <OrganizationSwitcher appearance={{
-                    baseTheme:dark, 
+                    baseTheme: dark,
                     elements: {
                         organizationalSwitherTrigger: "py-6 px-4"
                     }

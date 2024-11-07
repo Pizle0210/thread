@@ -11,11 +11,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '../ui/form';
 import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
 import { isBase64Image } from '@/lib/utils';
 import { useUploadThing } from '@/lib/uploadthing'
+import { updateUser } from '@/lib/actions/user.actions';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 
@@ -35,6 +38,9 @@ export default function AccountProfile({ user, btnTitle }: Props) {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<File[]>([])
   const { startUpload } = useUploadThing('media')
+
+  const router = useRouter()
+  const pathname = usePathname()
 
 
   // form
@@ -85,7 +91,16 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     }
 
     //  update profile
+    await updateUser({
+      name: values.name,
+      bio: values.bio,
+      username: values.username,
+      image: values.profile_photo,
+      userId: user.id,
+      path: pathname,
+    })
 
+    pathname === '/profile/edit' ? router.back() : router.push('/');
 
   }
 
@@ -116,6 +131,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -135,6 +151,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -154,6 +171,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -173,6 +191,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
