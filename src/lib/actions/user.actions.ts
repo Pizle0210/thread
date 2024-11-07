@@ -4,14 +4,21 @@ import { revalidatePath } from "next/cache";
 import { User } from "../models/user.model";
 import { connectToDB } from "../mongoose";
 
-export async function updateUser<T>(
-  userId: string,
+
+// updating user
+export async function updateUser({
+  userId,
+  username,
+  name,
+  bio,
+  image,
+  path
+}:{userId: string,
   username: string,
   name: string,
   bio: string,
   image: string,
-  path: string
-): Promise<T | null | void> {
+  path: string}): Promise<void> {
   connectToDB();
 
   try {
@@ -32,5 +39,27 @@ export async function updateUser<T>(
   } catch (error:unknown) {
     const errMsg = error instanceof Error ? error.message : 'An error has occured'   
     throw new Error(errMsg)
+  }
+}
+
+
+
+
+// fetching User
+
+export async function fetchUser(userId:string) {
+  try {
+    connectToDB()
+
+    return await User.findOne({
+      id:userId
+    })
+      // .populate({
+      // path: 'communities',
+      // model: Community })
+  } catch (error: unknown) {
+    const errMsg = error instanceof Error ? error.message : `error encountered. could not fetch users`;
+    throw new Error(errMsg)
+    
   }
 }
