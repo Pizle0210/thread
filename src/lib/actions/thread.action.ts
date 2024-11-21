@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { Thread } from "../models/thread.model";
 import { User } from "../models/user.model";
 import { connectToDB } from "../mongoose";
+import { toast } from "sonner";
 
 export async function createThread({
   text,
@@ -70,5 +71,43 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     const errMsg =
       error instanceof Error ? error.message : `Couldn't fetch posts`;
     throw new Error(errMsg);
+  }
+}
+
+export async function fetchThreadById(id: string) {
+  connectToDB();
+  try {
+    const thread = await Thread.findById(id)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author", //populates each child thread with its author
+            model: User,
+            select: "_id id name image parentId",
+          },
+          {
+            path: "children",
+            model: Thread,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id parentId image",
+            },
+          },
+        ],
+      })
+      .exec();
+    // return fetched thread to Thread page
+    return thread;
+  } catch (error: unknown) {
+    const errMsg =
+      error instanceof Error ? error.message : `Couldn't fetch threads`;
+    toast.error(errMsg);
   }
 }
