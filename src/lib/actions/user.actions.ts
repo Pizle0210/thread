@@ -31,7 +31,7 @@ export async function updateUser({
         image,
         onboarded: true,
       },
-      { upsert: true }
+      { upsert: true } //updates row if it exist in db && inserts a new row if specified value doesn't exist
     );
   
     if (path === "/profile/edit") revalidatePath(path);

@@ -51,8 +51,6 @@ export default function PostThread({ userId }: { userId: string }) {
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex mt-8 flex-col gap-10 relative justify-start">
-
-
                 <FormField
                     control={form.control}
                     name="thread"
