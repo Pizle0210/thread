@@ -140,11 +140,11 @@
 
 /* Account Profile  */
 .account-form_image-label {
-  @apply flex items-center justify-center rounded-full bg-dark-4 !important;
+  @apply flex h-24 w-24 items-center justify-center rounded-full bg-dark-4 !important;
 }
 
 .account-form_image-input {
-  @apply cursor-pointer border-none bg-transparent outline-none file:text-yellow-500 !important;
+  @apply cursor-pointer border-none bg-transparent outline-none file:text-blue !important;
 }
 
 .account-form_input {
@@ -154,9 +154,8 @@
 /* Comment Form */
 .comment-form {
   @apply mt-10 flex items-center gap-4 border-y border-y-dark-4 py-5 max-xs:flex-col !important;
-}
+} 
 
 .comment-form_btn {
-  @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
-}
-
+  @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full mb-0 !important;
+} 
