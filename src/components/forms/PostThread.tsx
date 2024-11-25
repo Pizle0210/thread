@@ -17,11 +17,10 @@ import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.action';
 
 
-export default function PostThread({ userId }: { userId: string }) {
+export default function  PostThread({ userId }: { userId: string }) {
 
     const router = useRouter()
     const pathname = usePathname()
-
 
     // form
     const form = useForm<z.infer<typeof ThreadValidation>>({

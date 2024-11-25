@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -38,7 +39,11 @@ export default function ThreadCard({
   isComment,
 }: ThreadType) {
   return (
-    <article className="flex w-full flex-col rounded-xl bg-dark-4 p-4 sm:p-7">
+    <article
+      className={cn(
+        `flex w-full flex-col rounded-xl ${isComment ? "px-7" : "bg-dark-4 p-4 sm:p-7"}`,
+      )}
+    >
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-3">
           <div className="flex flex-col items-center">
