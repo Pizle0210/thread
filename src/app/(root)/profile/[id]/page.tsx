@@ -6,6 +6,7 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import Image from "next/image";
+import Threadtab from "@/components/profile/thread-tab";
 
 export default async function page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -47,6 +48,19 @@ export default async function page({ params }: { params: { id: string } }) {
               </TabsTrigger>
             ))}
           </TabsList>
+          {profileTabs.map((tab) => (
+            <TabsContent
+              key={`content-${tab.label}`}
+              value={tab.value}
+              className="w-full text-light-1"
+            >
+              <Threadtab
+                accountId={userInfo.id}
+                accountType="User"
+                currentUserId={user.id}
+              />
+            </TabsContent>
+          ))}
         </Tabs>
       </div>
     </section>
