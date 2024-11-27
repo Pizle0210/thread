@@ -22,9 +22,8 @@ export async function updateUser({
   image: string;
   path: string;
 }): Promise<void> {
-  connectToDB();
-
   try {
+    connectToDB();
     await User.findOneAndUpdate(
       { id: userId },
       {
@@ -144,11 +143,40 @@ export async function fetchUsers({
     const isNext = totalUserCount > skipAmount + users.length;
 
     return { users, isNext };
-
-
   } catch (error) {
     const errMsg =
       error instanceof Error ? error.message : "Couldn't fetch users";
+    throw new Error(errMsg);
+  }
+}
+
+export async function getActivity(userId: string) {
+  try {
+    connectToDB();
+
+    // find all threads by user
+    const userThreads = await Thread.find({ author: userId });
+
+     
+    // collect all child thread ids(replies) from the children field
+    const childThreadIds = userThreads.reduce((acc, userThread) =>
+      acc.concat(userThread.children),
+    );
+    // replies of other users ignoring author's replies
+    const replies = await Thread.find({
+      _id: { $in: childThreadIds },
+      author: { $ne: userId }, //  $ne = not
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+
+    // return
+    return replies;
+  } catch (error: unknown) {
+    const errMsg =
+      error instanceof Error ? error.message : "Couldn't fetch activities";
     throw new Error(errMsg);
   }
 }
