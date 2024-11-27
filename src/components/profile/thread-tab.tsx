@@ -1,4 +1,4 @@
-import { fetchUserPost } from "@/lib/actions/thread.action";
+import { fetchUserPost } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import React from "react";
 import ThreadCard from "../cards/thread-card";

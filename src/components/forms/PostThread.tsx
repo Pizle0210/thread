@@ -43,8 +43,6 @@ export default function  PostThread({ userId }: { userId: string }) {
     }
 
 
-
-
     return (
         <Form {...form}>
             <form
