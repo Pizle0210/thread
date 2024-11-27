@@ -159,9 +159,9 @@ export async function getActivity(userId: string) {
 
      
     // collect all child thread ids(replies) from the children field
-    const childThreadIds = userThreads.reduce((acc, userThread) =>
-      acc.concat(userThread.children),
-    );
+       const childThreadIds = userThreads.reduce((acc, userThread) => {
+         return acc.concat(userThread.children);
+       }, []);
     // replies of other users ignoring author's replies
     const replies = await Thread.find({
       _id: { $in: childThreadIds },
@@ -177,6 +177,6 @@ export async function getActivity(userId: string) {
   } catch (error: unknown) {
     const errMsg =
       error instanceof Error ? error.message : "Couldn't fetch activities";
-    throw new Error(errMsg);
+    throw new Error(errMsg); 
   }
 }
