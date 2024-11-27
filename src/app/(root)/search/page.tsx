@@ -1,9 +1,7 @@
-import ProfileHeader from "@/components/profile/profile-header";
 import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
-import Image from "next/image";
 import UserCard from "@/components/cards/user-card";
 
 export default async function page() {
@@ -24,7 +22,7 @@ export default async function page() {
   console.log(result);
 
   return (
-    <section>
+    <section> 
       <h1 className="head-text mb-10">Search</h1>
 
       {/* search bar */}

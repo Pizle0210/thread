@@ -75,8 +75,8 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
 }
 
 export async function fetchThreadById(id: string) {
-  connectToDB();
   try {
+    connectToDB();
     const thread = await Thread.findById(id)
       .populate({
         path: "author",
@@ -118,9 +118,9 @@ export async function addCommentToThread(
   userId: string,
   path: string,
 ) {
-  connectToDB();
-
+  
   try {
+    connectToDB();
     // Find the original thread by its ID
     const originalThread = await Thread.findById(threadId);
 
