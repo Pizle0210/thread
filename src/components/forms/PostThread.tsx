@@ -60,7 +60,7 @@ export default function  PostThread({ userId }: { userId: string }) {
                             </FormLabel>
                             <FormControl className='no-focus border border-dark-4 shadow-inner focus:shadow-gray-50 transition-shadow focus:duration-700 '>
                                 <Textarea
-                                    rows={15}
+                                    rows={20}
                                     className='bg-gray-400 account-form_input no-focus'
                                     {...field}
                                 />
@@ -69,7 +69,7 @@ export default function  PostThread({ userId }: { userId: string }) {
                         </FormItem>
                     )}
                 />
-                <Button type='submit' className='p-5 sm:absolute sm:bottom-5 rounded-md sm:right-5 bg-white font-bold'>Post Thread</Button>
+                <Button type='submit' className='p-5 sm:absolute  sm:bottom-5 rounded-md sm:right-5 bg-white font-bold'>Post Thread</Button>
             </form>
         </Form>
     )

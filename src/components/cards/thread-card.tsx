@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type ThreadType = {
+export type ThreadType = {
   id: string;
   content: string;
   author: {
@@ -45,7 +45,7 @@ export default function ThreadCard({
       )}
     >
       <div className="flex items-start justify-between">
-        <div className="flex w-full flex-1 flex-row gap-3">
+        <div className="flex w-full flex-1 flex-row gap-5">
           <div className="flex flex-col items-center">
             <Link
               href={`/profile/${author?.id}`}
@@ -69,7 +69,8 @@ export default function ThreadCard({
             </Link>
 
             <p className="text-small-regular text-gray-300">{content}</p>
-            <div className="flex gap-3">
+
+            <div className="mb-10 flex gap-3.5">
               <Image
                 src={"/assets/heart-gray.svg"}
                 height={26}
@@ -108,7 +109,10 @@ export default function ThreadCard({
 
             {isComment && comments.length > 0 && (
               <Link href={`/thread/${id}`}>
-                <p className="mt-1 text-gray-400">{comments.length} replies</p>
+                <p className="mt-1 text-gray-400">
+                  {comments.length}{" "}
+                  {comments.length === 1 ? "reply" : "replies"}
+                </p>
               </Link>
             )}
           </div>

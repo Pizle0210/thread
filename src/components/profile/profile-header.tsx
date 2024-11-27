@@ -33,7 +33,6 @@ export default function ProfileHeader<T>({
             <h2 className="text-left text-heading3-bold text-light-1">
               {name}
             </h2>
-            <p className="text-base-medium text-gray-400">{username}</p>
           </div>
         </div>
       </div>
@@ -42,7 +41,7 @@ export default function ProfileHeader<T>({
 
       {/* bio */}
       <p className="mt-5 max-w-lg text-base-regular text-white/60">{bio}</p>
-      <div className="5 mt-12 h-0 w-full bg-dark-3" />
+      {/* <div className=" mt-12 h-0 w-full bg-dark-3" /> */}
     </div>
   );
 }
