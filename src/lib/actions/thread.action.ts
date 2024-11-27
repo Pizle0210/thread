@@ -151,28 +151,3 @@ export async function addCommentToThread(
   }
 }
 
-export async function fetchUserPost(userId: string) {
-  try {
-    connectToDB();
-    //find threads belonging to the userId
-    const threads = await User.findOne({ id: userId }).populate({
-      path: "threads",
-      model: Thread,
-      populate: {
-        path: "children",
-        model: Thread,
-        populate: {
-          path: "author",
-          model: User,
-          select: "name image id",
-        },
-      },
-    });
-
-    return threads;
-  } catch (error: unknown) {
-    const errMsg =
-      error instanceof Error ? error.message : "Failed to fetch posts";
-    throw new Error(errMsg);
-  }
-}

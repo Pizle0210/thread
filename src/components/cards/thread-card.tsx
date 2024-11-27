@@ -25,6 +25,7 @@ export type ThreadType = {
   isComment?: boolean;
   parentId: string | null;
   currentUserId?: string;
+  className?: string;
 };
 
 export default function ThreadCard({
@@ -37,11 +38,13 @@ export default function ThreadCard({
   comments,
   currentUserId,
   isComment,
+  className,
 }: ThreadType) {
   return (
     <article
       className={cn(
         `flex w-full flex-col rounded-xl ${isComment ? "px-7" : "bg-dark-4 p-4 sm:p-7"}`,
+        className,
       )}
     >
       <div className="flex items-start justify-between">
@@ -70,41 +73,43 @@ export default function ThreadCard({
 
             <p className="text-small-regular text-gray-300">{content}</p>
 
-            <div className="mb-10 flex gap-3.5">
-              <Image
-                src={"/assets/heart-gray.svg"}
-                height={26}
-                width={26}
-                priority
-                alt="heart"
-                className="cursor-pointer object-contain"
-              />
-              <Link href={`/thread/${id}`} className="">
+            <div className="">
+              <div className="mb-10 flex gap-3.5">
                 <Image
-                  src={"/assets/reply.svg"}
+                  src={"/assets/heart-gray.svg"}
                   height={26}
                   width={26}
                   priority
-                  alt="reply"
+                  alt="heart"
                   className="cursor-pointer object-contain"
                 />
-              </Link>
-              <Image
-                src={"/assets/repost.svg"}
-                height={26}
-                width={26}
-                priority
-                alt="repost"
-                className="cursor-pointer object-contain"
-              />
-              <Image
-                src={"/assets/share.svg"}
-                height={26}
-                width={26}
-                priority
-                alt="share"
-                className="cursor-pointer object-contain"
-              />
+                <Link href={`/thread/${id}`} className="">
+                  <Image
+                    src={"/assets/reply.svg"}
+                    height={26}
+                    width={26}
+                    priority
+                    alt="reply"
+                    className="cursor-pointer object-contain"
+                  />
+                </Link>
+                <Image
+                  src={"/assets/repost.svg"}
+                  height={26}
+                  width={26}
+                  priority
+                  alt="repost"
+                  className="cursor-pointer object-contain"
+                />
+                <Image
+                  src={"/assets/share.svg"}
+                  height={26}
+                  width={26}
+                  priority
+                  alt="share"
+                  className="cursor-pointer object-contain"
+                />
+              </div>
             </div>
 
             {isComment && comments.length > 0 && (
