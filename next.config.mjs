@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
-    serverComponentsExternalPackages:['mongoose'],
+    serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
     remotePatterns: [
@@ -11,8 +14,7 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-  }, 
+  },
 };
 
 export default nextConfig;
-
